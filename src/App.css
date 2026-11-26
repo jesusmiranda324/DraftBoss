@@ -1,0 +1,175 @@
+/* Main application */
+.top {
+  min-height: 100vh;
+  width: 100%;
+  padding: 24px;
+  background: #10141d;
+  color: #f1f5f9;
+}
+
+/* Header */
+#headerGroup {
+  color: #f8fafc;
+}
+
+#headerGroup h1 {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+/* Timer */
+#timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+#time {
+  margin: 0;
+  color: #f97316;
+  font-size: 36px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+#buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+#buttons button,
+.topButtons input,
+.inputBar button {
+  padding: 9px 14px;
+  border: 1px solid #374151;
+  border-radius: 7px;
+  background: #1e293b;
+  color: #f8fafc;
+}
+
+#buttons button:hover,
+.topButtons input:hover,
+.inputBar button:hover {
+  background: #334155;
+}
+
+/* Header buttons */
+.topButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Player import */
+.inputBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 28px 0;
+  padding: 18px;
+  border: 1px solid #293548;
+  border-radius: 10px;
+  background: #1b2433;
+}
+
+/* Draft board */
+.table {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #334155;
+  border-radius: 10px;
+}
+
+.table table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #e2e8f0;
+}
+
+.table th {
+  padding: 16px;
+  border: 1px solid #334155;
+  background: #1e293b;
+  color: #f8fafc;
+}
+
+.table td {
+  padding: 14px;
+  border: 1px solid #334155;
+  background: #151c29;
+}
+
+.table tbody tr:hover td {
+  background: #202b3c;
+}
+
+/* Player search */
+.player-lookup input {
+  width: 100%;
+  padding: 9px;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  background: #101827;
+  color: #f8fafc;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  .top {
+    padding: 12px;
+  }
+
+  #headerGroup h1 {
+    font-size: 24px;
+  }
+
+  #time {
+    font-size: 28px;
+  }
+}
+
+/* Normal draft cells */
+.table td {
+    padding: 14px;
+    border: 1px solid #334155;
+    background: #172235;
+    color: #f8fafc;
+}
+
+/* Active player selection */
+.table td.active-pick {
+    background: #153b3b;
+    outline: 2px solid #2dd4bf;
+    outline-offset: -2px;
+}
+
+/* Player information */
+.player-lookup {
+    color: #f8fafc;
+}
+
+.player-lookup input {
+    background: #111827;
+    color: #f8fafc;
+    border: 1px solid #475569;
+}
+
+/* Timer setting */
+.timer-setting {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #e5e7eb;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.timer-setting input {
+    accent-color: #2dd4bf;
+    cursor: pointer;
+}

@@ -1,0 +1,93 @@
+
+import { useState, useEffect, useRef } from "react";
+
+function PlayerLookup({ player, onPlayerSelect, focusSignal }) {
+    const [playerId, setPlayerId] = useState("");
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    // Reference to the search input.
+    const inputRef = useRef(null);
+
+    // Automatically focus the active player's search field.
+    useEffect(() => {
+        if (focusSignal > 0 && inputRef.current && !player) {
+            inputRef.current.focus();
+        }
+    }, [focusSignal, player]);
+
+    async function searchPlayer() {
+        if (!playerId.trim()) {
+            onPlayerSelect(null);
+            setError("");
+            return;
+        }
+
+        setLoading(true);
+
+        try {
+            const response = await fetch(
+                `https://draftboss.onrender.com/players.json?search=`
+            );
+
+            if (!response.ok) {
+                throw new Error("Unable to search for player.");
+            }
+
+            const data = await response.json();
+
+            if (data.length > 0) {
+                onPlayerSelect(data[0]);
+                setError("");
+            } else {
+                onPlayerSelect(null);
+                setError("Player not found.");
+            }
+        } catch (err) {
+            onPlayerSelect(null);
+            setError("Could not connect to Rails.");
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    return (
+        <div className="player-lookup">
+            {!player && (
+                <input
+                    ref={inputRef}
+                    type="text"
+                    placeholder="Search player ID..."
+                    value={playerId}
+                    onChange={(e) => setPlayerId(e.target.value)}
+                    onBlur={searchPlayer}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                            searchPlayer();
+                        }
+                    }}
+                />
+            )}
+
+            {loading && <p>Searching...</p>}
+
+            {player && (
+                <div className="player-result">
+                    <br />
+                    <p><strong>ID:</strong> {player.player_id}</p>
+                    <p><strong>Name:</strong> {player.name}</p>
+                    <p>
+                        <strong>Salary:</strong>{" "}
+                        {player.salary != null
+                            ? `$${Number(player.salary).toLocaleString()}`
+                            : "N/A"}
+                    </p>
+                </div>
+            )}
+
+            {error && <p className="player-error">{error}</p>}
+        </div>
+    );
+}
+
+export default PlayerLookup;
