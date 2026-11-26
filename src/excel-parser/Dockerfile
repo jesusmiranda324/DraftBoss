@@ -70,6 +70,11 @@ USER 1000:1000
 COPY --chown=rails:rails --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
 COPY --chown=rails:rails --from=build /rails /rails
 
+# Ensure Rails can create its production SQLite database
+RUN mkdir -p /rails/storage && chown -R rails:rails /rails/storage
+
+# Entrypoint prepares the database.
+
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
