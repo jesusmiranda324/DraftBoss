@@ -21,7 +21,7 @@ export default function ExcelUpload() {
 
     try {
       const response = await fetch(
-        "https://draftboss.onrender.com/players/import",
+        "https://draftboss-backend.onrender.com/players/import",
         {
           method: "POST",
           body: formData,
