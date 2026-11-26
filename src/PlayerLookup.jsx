@@ -27,7 +27,7 @@ function PlayerLookup({ player, onPlayerSelect, focusSignal }) {
 
         try {
             const response = await fetch(
-                `https://draftboss.onrender.com/players.json?search=`
+                `https://draftboss-backend.onrender.com/players.json?search=`
             );
 
             if (!response.ok) {
